@@ -10,13 +10,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{csrf_token()}}">
-  <title>AdminLTE 3 | Starter</title>
+  <title></title>
 
-  <link rel="stylesheet" href="{{asset('css\adminlte.min.css')}}">
+  <link rel="icon" href="{{asset('/vue-logo.jpg')}}" type="image/x-icon"/>
+  <link rel="stylesheet" href="{{asset('css\adminlte.min.css')}}" defer>
+  <link rel="stylesheet" href="{{asset('css\app.css')}}">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet">
+  <link href="{{asset('plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet"
+  type="text/css">
+<link href="{{asset('plugins/bootstrap-datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('plugins\bootstrap-datatable\css\rowReorder.dataTables.min.css')}}" rel="stylesheet" />
 </head>
 
-<body class="hold-transition sidebar-mini" >
+<body class="hold-transition sidebar-mini">
   <div class="wrapper" id="app">
 
     <!-- Navbar -->
@@ -74,7 +80,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
             <li class="nav-item">
               <router-link to="/dashboard" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <i class="nav-icon fas fa-tachometer-alt color-blue"></i>
                 <p>
                   Dashboard
                 </p>
@@ -83,30 +89,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link active">
-                <i class="nav-icon fas fa-cog"></i>
+              <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cog color-green"></i>
                 <p>
                   Management
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-
+                <li class="nav-item">
+                  <router-link to="/users" class="nav-link">
+                    <i class="nav-icon fas fa-users color-teal"></i>
+                    <p>
+                      Users
+                    </p>
+                  </router-link>
+                </li>
                 <li class="nav-item">
                   <router-link to="/profile" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
+                    <i class="nav-icon fas fa-user color-orange"></i>
                     <p>
                       Profile
                     </p>
                   </router-link>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-power-off"></i>
+
+                  <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                    <i class="nav-icon fas fa-power-off color-red"></i>
                     <p>
                       Logout
                     </p>
                   </a>
+
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
                 </li>
               </ul>
             </li>
@@ -151,18 +170,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
         Anything you want
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+     
+      <strong>Copyright &copy; 2014 - {{\Carbon\Carbon::now()->year}} Richard.</strong> All rights reserved.
     </footer>
   </div>
   <!-- ./wrapper -->
 
   <!-- REQUIRED SCRIPTS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
+  {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> --}}
+  <script src={{asset("js/app.js")}} ></script>
   <script src="{{asset('js\adminlte.min.js')}}"></script>
-  
+  <script src="{{asset('plugins/bootstrap-datatable/js/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('plugins/bootstrap-datatable/js/dataTables.buttons.min.js')}}"></script>
+
 </body>
 
 </html>
-
